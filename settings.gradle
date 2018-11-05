@@ -1,4 +1,5 @@
 rootProject.name = 'testg'
 
 println '初始化执行完毕'
+include 'app'
 
