@@ -22,3 +22,20 @@ this.afterEvaluate {
 this.gradle.buildFinished {
     println '编译完成'
 }
+this.getProjects()
+
+def getProjects(){
+    println '------'
+    println 'root project'
+    println '------'
+
+    this.getAllprojects().eachWithIndex{ Project entry, int i ->
+        if(i == 0){
+            println "Root project:'${entry.name}'"
+        }else{
+            println "-------project:'${entry.name}'"
+        }
+
+    }
+
+}
