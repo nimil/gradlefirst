@@ -1,3 +1,5 @@
+import org.omg.CORBA.RepositoryIdHelper
+
 plugins {
     id 'java'
 }
@@ -6,6 +8,11 @@ group 'xin.nimil'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+ext{
+    version = '1.1.0'
+     groupName = 'xin.nimil11'
+}
 
 repositories {
     mavenCentral()
@@ -38,4 +45,70 @@ def getProjects(){
 
     }
 
+}
+
+project('app'){
+    Project project ->
+       println project.name
+        println  '11111'
+}
+
+dependencies{
+    //可以添加fileTree文件
+    compile fileTree()
+    //添加jar包
+    compile  jar
+
+    //解决依赖冲突  解决jar包冲突
+    compile(jar){
+        excloud moudle:'...'
+        excloud group:'xin.nimil'
+
+        //传递依赖
+        transitive false
+    }
+
+    //第三方库会打到最终的输出中
+    compile 可以添加有源码的库工程
+
+    //只在编译期使用当前库工程 而在运行期会提示找不到
+    provided(jar)
+}
+
+allprojects {
+   group this.groupName
+    version this.version
+}
+
+println project('app').group
+println project('app').version
+
+println getRootDir().absolutePath
+println getProjectDir().absolutePath
+println getBuildDir().absolutePath
+
+buildscript {
+    ScriptHandler scriptHandler ->
+        //配置我们工程的仓库地址
+        scriptHandler.repositories {
+            RepositoryHandler repositories->
+                repositories.jcenter()
+                repositories.mavenCentral()
+                repositories.mavenLocal()
+                repositories.maven {
+                    name 'maven-aliyun'
+                    url 'http://maven.aliyun.com/nexus/content/groups/public'
+                    credentials{
+                        username = ''
+                        password = ''
+                    }
+                }
+
+
+        }
+
+        //w为gradle添加插件地址
+        scriptHandler.dependencies {
+            classpath 'url'
+        }
 }
