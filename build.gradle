@@ -1,4 +1,4 @@
-import org.omg.CORBA.RepositoryIdHelper
+
 
 plugins {
     id 'java'
@@ -52,7 +52,7 @@ project('app'){
        println project.name
         println  '11111'
 }
-
+/**
 dependencies{
     //可以添加fileTree文件
     compile fileTree()
@@ -74,7 +74,7 @@ dependencies{
     //只在编译期使用当前库工程 而在运行期会提示找不到
     provided(jar)
 }
-
+**/
 allprojects {
    group this.groupName
     version this.version
@@ -86,7 +86,7 @@ println project('app').version
 println getRootDir().absolutePath
 println getProjectDir().absolutePath
 println getBuildDir().absolutePath
-
+/**
 buildscript {
     ScriptHandler scriptHandler ->
         //配置我们工程的仓库地址
@@ -111,4 +111,13 @@ buildscript {
         scriptHandler.dependencies {
             classpath 'url'
         }
+}
+ **/
+
+task helloTsk{
+    println 'hello task'
+}
+
+this.tasks.create(name:'hellotask2'){
+    println 'hello task2'
 }
